@@ -1,4 +1,5 @@
-# Magic 8 Ball
+# Magic 8 Ball Development version
+# This version has a lot of extra stuff for testing and debugging
 import time
 import thumby
 import math
