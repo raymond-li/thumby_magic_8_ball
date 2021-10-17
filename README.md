@@ -47,7 +47,7 @@ Message ideas:
 ## Credits
 My wife for the lovely short weekend project idea and for drawing the final version of the sprite.
 
-TinyCircuits for developing fun products like this and providing example code to get started with.
+TinyCircuits for developing fun products like this and providing example code to get started with. Check out the official Thumby forum here: http://forum.tinycircuits.com/index.php?board=11.0
 
 ## License
 MIT License
