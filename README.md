@@ -38,6 +38,12 @@ Some easy things to customize:
 - The animation for idle and shaking are parameterized so you can make them bob faster or slower, swinging more or less.
 - The behavior for how long a button should be held in order to get a message is parameterized as well as the timeout for how long to wait until it resets to the idle animation
 
+Message ideas:
+ - Encouraging words and phrases. ex. "Hang\nin there!"
+ - Fortune cookie wisdom. ex. "A new\njourney\nawaits\nyou"
+ - One-sided flashcards. ex. "legerdemain"
+ - Random number generator. ex. ["4"](https://xkcd.com/221/)
+
 ## Credits
 My wife for the lovely short weekend project idea and for drawing the final version of the sprite.
 
