@@ -14,11 +14,16 @@ eight_ball_inv_v7 = (0,0,128,192,224,240,248,252,252,254,254,254,255,255,255,255
 # Update this line to use your own sprite here!
 my_sprite = eight_ball_inv_v7
 
+# Maximum 9 characters per line
+# Up to 5 lines can fit on the screen
+# Everything else will get clipped
+# Characters may be uppercase letters, lowercase letters, numerals, punctuation and whatever else thumby.display.drawText() supports is valid
+# Customize wise messages here!
 voodoo_practical = [
     "IT IS\nCERTAIN",
     "IT IS\nDECIDELY\nSO",
     "WITHOUT\nA\nDOUBT",
-    "YES\nDEF",
+    "YES\nDEF", # DEFINITELY doesn't fit =/
     "YOU MAY\nRELY\nON IT",
     "AS I\nSEE IT\nYES",
     "MOST\nLIKELY",
@@ -29,7 +34,7 @@ voodoo_practical = [
     "ASK\nAGAIN\nLATER",
     "BETTER\nNOT TELL\nYOU NOW",
     "CANNOT\nPREDICT\nNOW",
-    "FOCUS\nAND ASK\nAGAIN",
+    "FOCUS\nAND ASK\nAGAIN", # CONCENTRATE doesn't fit =/
     "DON'T\nCOUNT\nON IT",
     "MY REPLY\nIS\nNO",
     "MY\nSOURCES\nSAY NO",
@@ -39,8 +44,40 @@ voodoo_practical = [
 
 # Helper functions:
 # Draws up to 3 lines of 9 characters
-# Centers each line
-def draw_text(txt : str, x=0, y=0, color=1):
+# Centers each line by padding the string with whitespace. Not perfectly centered
+def draw_text(txt : str, x=0, y=0, color=1, force_line_spacing=None, force_y_off=None):
+    lines = txt.split('\n')
+    
+    # offset the entire text drawing depending on how many lines there are
+    # space lines apart for readability. Just based off my preference
+    if len(lines) == 1:
+        y_off = 16
+        line_spacing = 0 # Doesn't matter
+    elif len(lines) == 2:
+        y_off = 9
+        line_spacing = 7
+    elif len(lines) == 3:
+        y_off = 1
+        line_spacing = 7
+    elif len(lines) == 4:
+        y_off = 1
+        line_spacing = 3
+    elif len(lines) == 5:
+        y_off = 0
+        line_spacing = 1
+    else:
+        y_off = 0
+        line_spacing = 1
+    if force_y_off:
+        y_off = force_y_off
+    if force_line_spacing:
+        line_spacing = force_line_spacing
+
+    for i in range(len(lines)):
+        y_off_rel = i * (7 + line_spacing) # relative offset. offset each line from each other so they don't overlap
+        thumby.display.drawText(lines[i].center(9), x, y + y_off + y_off_rel, color)
+
+def draw_text_test(txt : str, x=0, y=0, color=1):
     lines = txt.split('\n')
     
     # offset the entire text drawing depending on how many lines there are
@@ -50,9 +87,12 @@ def draw_text(txt : str, x=0, y=0, color=1):
         y_off = 8
     elif len(lines) == 3:
         y_off = 1
+    elif len(lines) >= 4:
+        y_off = 0
+    
 
     for i in range(len(lines)):
-        y_off_rel = i*15 # relative offset. offset each line from each other so they don't overlap
+        y_off_rel = i*7 # relative offset. offset each line from each other so they don't overlap
         thumby.display.drawText(lines[i].center(9), x, y + y_off + y_off_rel, color)
 
 # Copied and modified from TinyBlocks.py
