@@ -19,8 +19,6 @@ my_sprite = eight_ball_inv_v7
 # Everything else will get clipped
 # Characters may be uppercase letters, lowercase letters, numerals, punctuation and whatever else thumby.display.drawText() supports is valid
 # Customize wise messages here!
-# https://www.reddit.com/r/mildlyinteresting/comments/39zg4p/comment/cs7uv3k/?utm_source=share&utm_medium=web2x&context=3
-# https://en.wikipedia.org/wiki/Magic_8-Ball#Possible_answers
 voodoo_practical = [
     "IT IS\nCERTAIN",
     "IT IS\nDECIDELY\nSO",
@@ -77,24 +75,6 @@ def draw_text(txt : str, x=0, y=0, color=1, force_line_spacing=None, force_y_off
 
     for i in range(len(lines)):
         y_off_rel = i * (7 + line_spacing) # relative offset. offset each line from each other so they don't overlap
-        thumby.display.drawText(lines[i].center(9), x, y + y_off + y_off_rel, color)
-
-def draw_text_test(txt : str, x=0, y=0, color=1):
-    lines = txt.split('\n')
-    
-    # offset the entire text drawing depending on how many lines there are
-    if len(lines) == 1:
-        y_off = 15
-    elif len(lines) == 2:
-        y_off = 8
-    elif len(lines) == 3:
-        y_off = 1
-    elif len(lines) >= 4:
-        y_off = 0
-    
-
-    for i in range(len(lines)):
-        y_off_rel = i*7 # relative offset. offset each line from each other so they don't overlap
         thumby.display.drawText(lines[i].center(9), x, y + y_off + y_off_rel, color)
 
 # Copied and modified from TinyBlocks.py
