@@ -3,6 +3,8 @@ With modern technology, the mysterious, all-knowing ball answers to your thumb n
 
 A ~~simple~~ mystical app for [TinyCircuits](https://tinycircuits.com/)' upcoming [Thumby](https://thumby.us/) miniature keychain-size gaming console.
 
+![demo animation](demo.gif)
+
 ## Running it in the Emulator:
 TinyCircuits has provided a handy [IDE with built-in Thumby emulator](https://tinycircuits.github.io/)!
 
