@@ -19,6 +19,8 @@ my_sprite = eight_ball_inv_v7
 # Everything else will get clipped
 # Characters may be uppercase letters, lowercase letters, numerals, punctuation and whatever else thumby.display.drawText() supports is valid
 # Customize wise messages here!
+# https://www.reddit.com/r/mildlyinteresting/comments/39zg4p/comment/cs7uv3k/?utm_source=share&utm_medium=web2x&context=3
+# https://en.wikipedia.org/wiki/Magic_8-Ball#Possible_answers
 voodoo_practical = [
     "IT IS\nCERTAIN",
     "IT IS\nDECIDELY\nSO",
