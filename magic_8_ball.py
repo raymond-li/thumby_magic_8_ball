@@ -77,22 +77,6 @@ def draw_text(txt : str, x=0, y=0, color=1, force_line_spacing=None, force_y_off
         y_off_rel = i * (7 + line_spacing) # relative offset. offset each line from each other so they don't overlap
         thumby.display.drawText(lines[i].center(9), x, y + y_off + y_off_rel, color)
 
-# Copied and modified from TinyBlocks.py
-def getcharinputNew():
-    if(thumby.buttonL.pressed()):
-        return 'L'
-    if(thumby.buttonR.pressed()):
-        return 'R'
-    if(thumby.buttonU.pressed()):
-        return 'U'
-    if(thumby.buttonD.pressed()):
-        return 'D'
-    if(thumby.buttonA.pressed()):
-        return '1'
-    if(thumby.buttonB.pressed()):
-        return '2'
-    return ' '
-
 # Copied and modified from the default Thumby IDE code
 def draw_bobbing_sprite(sprite, sprite_w=32, sprite_h=32, bob_rate=125, bob_range=4):
     # Set arbitrary bob rate (higher is slower)
@@ -118,17 +102,17 @@ def draw_shaking_ball(sprite):
     draw_bobbing_sprite(sprite, bob_rate=40, bob_range=3)
 
 def magic_eight_ball(sprite):
-    shake_threshold_ms = 250 # Must shake at least this long before the venerable ball answers
-    idle_threshold_ms = 10000 # This long until the idle animation is shown again
+    SHAKE_THRESHOLD_MS = const(250) # Must shake at least this long before the venerable ball answers
+    IDLE_THRESHOLD_MS = const(10000) # This long until the idle animation is shown again
     time_shaken_ms = 0
     time_shaken_start = 0
     time_shaken_end = 0
     time_since_last_shake_ms = None
     is_displaying_msg = False
     is_shaking = False
+    seed = None
     while(1):
-        c=getcharinputNew()
-        any_button_is_pressed = c != ' '
+        any_button_is_pressed = thumby.inputPressed()
         if any_button_is_pressed:
             is_displaying_msg = False
             if not is_shaking:
@@ -145,7 +129,12 @@ def magic_eight_ball(sprite):
             #   show a random message
             # else,
             #   reset to the idle animation
-            if time_shaken_ms > shake_threshold_ms:
+            if time_shaken_ms > SHAKE_THRESHOLD_MS:
+                if seed == None:
+                    # only set the seed on the first completed shake so the 
+                    # time is less likely to be the same across runs of the app
+                    random.seed(time_shaken_end)
+                    seed = time_shaken_end
                 is_displaying_msg = True
                 rand_int = random.randint(0, len(voodoo_practical)-1)
                 thumby.display.fill(0) # Fill canvas to black
@@ -159,7 +148,7 @@ def magic_eight_ball(sprite):
             #   do nothing
             time_since_last_shake_ms = time.ticks_ms() - time_shaken_end
             # Check for idle state
-            if time_since_last_shake_ms > idle_threshold_ms:
+            if time_since_last_shake_ms > IDLE_THRESHOLD_MS:
                 is_displaying_msg = False
                 time_since_last_shake_ms = None
                 draw_idle_view(sprite)
