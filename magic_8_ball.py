@@ -28,10 +28,10 @@ import random
 
 # Create your own sprite here!
 # BITMAP: width: 32, height: 32
-eight_ball_inv_v7 = (0,0,128,192,224,240,248,252,252,254,254,254,255,255,255,255,255,255,255,255,254,254,254,252,252,248,240,224,192,128,0,0,
+eight_ball_inv_v7 = bytearray([0,0,128,192,224,240,248,252,252,254,254,254,255,255,255,255,255,255,255,255,254,254,254,252,252,248,240,224,192,128,0,0,
             240,254,255,255,255,255,255,255,255,255,255,195,153,60,126,126,126,126,60,153,195,255,255,255,255,255,255,255,255,255,254,240,
             15,127,255,255,255,255,255,255,255,255,255,225,204,158,191,191,191,191,158,204,225,255,255,255,255,255,255,255,255,255,127,15,
-            0,0,1,3,7,15,31,63,63,127,127,127,255,255,255,255,255,255,255,255,127,127,127,63,63,31,15,7,3,1,0,0)
+            0,0,1,3,7,15,31,63,63,127,127,127,255,255,255,255,255,255,255,255,127,127,127,63,63,31,15,7,3,1,0,0])
 # Update this line to use your own sprite here!
 my_sprite = eight_ball_inv_v7
 
@@ -109,11 +109,11 @@ def draw_bobbing_sprite(sprite, sprite_w=32, sprite_h=32, bob_rate=125, bob_rang
     bobOffset = math.sin(t0 / bob_rate) * bob_range
 
     # Center the sprite using screen and bitmap dimensions and apply bob offset
-    spriteX = int((thumby.DISPLAY_W/2) - (32/2))
-    spriteY = int(round((thumby.DISPLAY_H/2) - (32/2) + bobOffset))
+    spriteX = int((thumby.display.width/2) - (32/2))
+    spriteY = int(round((thumby.display.height/2) - (32/2) + bobOffset))
 
     # Display the bitmap using bitmap data, position, and bitmap dimensions
-    thumby.display.blit(sprite, spriteX, spriteY, sprite_w, sprite_h)
+    thumby.display.blit(sprite, spriteX, spriteY, sprite_w, sprite_h, 0, 0, 0)
     thumby.display.update()
 
 def draw_idle_view(sprite):
@@ -123,6 +123,7 @@ def draw_shaking_ball(sprite):
     draw_bobbing_sprite(sprite, bob_rate=40, bob_range=3)
 
 def magic_eight_ball(sprite):
+    thumby.display.setFont("/lib/font8x8.bin", 8, 8, 1)
     SHAKE_THRESHOLD_MS = const(250) # Must shake at least this long before the venerable ball answers
     IDLE_THRESHOLD_MS = const(10000) # This long until the idle animation is shown again
     time_shaken_ms = 0
